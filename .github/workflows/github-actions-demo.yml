@@ -1,7 +1,7 @@
 name: GitHub Actions Demo1
-run-name: ${{ github.actor }} is testing out GitHub Actions
-on: # rebuild any PRs and main branch changes
-  workflow_dispatch:
+run-name: '${{ github.actor }} is testing out GitHub Actions'
+'on':
+  workflow_dispatch: null
   pull_request:
     branches:
       - main
@@ -10,32 +10,26 @@ on: # rebuild any PRs and main branch changes
   push:
     branches:
       - main
-      - 'releases/*'
-
+      - releases/*
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: "echo \"\U0001F389 The job was automatically triggered by a ${{ github.event_name }} event.\""
+      - run: "echo \"\U0001F427 This job is now running on a ${{ runner.os }} server hosted by GitHub!\""
+      - run: "echo \"\U0001F50E The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}.\""
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: "echo \"\U0001F4A1 The ${{ github.repository }} repository has been cloned to the runner.\""
       - run: echo "The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "This job's status is ${{ job.status }}."
+      - run: 'echo "This job''s status is ${{ job.status }}."'
       - uses: actions/checkout@v4
-
-  add-to-project:
-    name: Add pull request to project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/add-to-project@RELEASE_VERSION
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
         with:
-          project-url: https://github.com/orgs/<orgName>/projects/<projectNumber>
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: needs-review, size/XL
-          label-operator: AND
+          commit-message: Cloud - Update available list
+          title: Cloud - Update available list
+    
