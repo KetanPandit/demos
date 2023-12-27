@@ -31,8 +31,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
 
-            [1]: https://github.com/peter-evans/create-pull-request
-          branch: ci-test-${{ matrix.target }}-${{ github.sha }}
+     
 
       - name: Close Pull
         uses: peter-evans/close-pull@v3
