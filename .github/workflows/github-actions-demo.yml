@@ -1,5 +1,5 @@
 name: GitHub Actions Demo1
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is testing out GitHub Actions
 on: [push]
 jobs:
   Explore-GitHub-Actions:
@@ -17,25 +17,9 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "This job's status is ${{ job.status }}."
       - uses: actions/checkout@v4
-      - name: Create commits
-        run: |
-          git config user.name 'Peter Evans'
-          git config user.email 'peter-evans@users.noreply.github.com'
-          date +%s > report.txt
-          git commit -am "Modify tracked file during workflow"
-          date +%s > new-report.txt
-          git add -A
-          git commit -m "Add untracked file during workflow"
-      - name: Uncommitted change
-        run: date +%s > report.txt
+          
+
+      # Make changes to pull request here
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
-
-     
-
-      - name: Close Pull
-        uses: peter-evans/close-pull@v3
-        with:
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          comment: '[CI] test ${{ matrix.target }}'
-          delete-branch: true
